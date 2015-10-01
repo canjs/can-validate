@@ -10,7 +10,7 @@
 
 //Copies old map validation plugin stuff
 steal('can', function (can) {
-
+	var validate = {}, proc, attrName;
 	//validations object is by property.  You can have validations that
 	//span properties, but this way we know which ones to run.
 	//  proc should return true if there's an error or the error message

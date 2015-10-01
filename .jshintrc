@@ -1,0 +1,100 @@
+{
+    // Settings
+    "passfail"      : false,  // Stop on first error.
+
+    // Predefined globals
+    "browser"       : true,   // Standard browser globals e.g. `window`, `document`.
+
+    // ES6
+    "esnext"              : true,
+
+    // Extra globals.
+    "predef"        : [
+        // Browserify Globals
+        "module",
+        "require",
+
+        // Steal Globals
+        "steal",
+
+        // NodeJS
+        "__dirname",
+        "process",
+
+        // jasmine
+        "jasmine",
+        "xdescribe",
+        "describe",
+        "it",
+        "xit",
+        "expect",
+        "beforeAll",
+        "beforeEach",
+        "afterEach",
+        "spyOn",
+        "runs",
+        "waits",
+        "waitsFor",
+
+        // jasmine-jquery
+        "loadFixtures",
+        "loadJSONFixtures",
+        "spyOnEvent",
+        "setFixtures",
+        "sandbox",
+
+        // qunit
+        "test",
+        "equal"
+    ],
+
+    // Development.
+    "debug"         : false,   // Allow debugger statements e.g. browser breakpoints.
+    "devel"         : false,   // Allow development statements e.g. `console.log();`.
+
+
+    // ES5
+    "strict"        : false,  // Require `use strict` pragma in every file.
+    "globalstrict"  : false,  // Allow global "use strict" (also enables 'strict').
+
+
+    // The Good Parts
+    "asi"           : false,  // Tolerate Automatic Semicolon Insertion (no semicolons).
+    "bitwise"       : false,  // Prevent the use of bitwise ops
+    "proto"         : false,  // Suppress warnings about the __proto__ property
+    "eqeqeq"        : true,   // Prohibit use of == or != in favour of === and !==
+    "laxbreak"      : false,  // Tolerate unsafe line breaks e.g. `return [\n] x` without semicolons.
+    "bitwise"       : false,  // Prohibit bitwise operators (&, |, ^, etc.).
+    "boss"          : false,  // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.
+    "curly"         : true,   // Require {} for every new block or scope.
+    "eqnull"        : true,   // Tolerate use of `== null`.
+    "evil"          : false,  // Tolerate use of `eval`.
+    "expr"          : false,  // Tolerate `ExpressionStatement` as Programs.
+    "forin"         : false,  // Require `for in` loops with `hasOwnPrototype`.
+    "immed"         : true,   // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
+    "supernew"      : false,  // This option suppresses warnings about "weird" constructions like new function () { ... } and new Object
+    "latedef"       : true,   // Prohibit variable use before definition.
+    "loopfunc"      : false,  // Allow functions to be defined within loops.
+    "sub"           : false,  // This option suppresses warnings about using [] notation where it can be expressed as dot notation
+    "noarg"         : true,   // Prohibit use of `arguments.caller` and `arguments.callee`.
+    "regexp"        : true,   // Prohibit `.` and `[^...]` in regular expressions.
+    "regexdash"     : false,  // Tolerate unescaped last dash i.e. `[-...]`.
+    "scripturl"     : true,   // Tolerate script-targeted URLs.
+    "shadow"        : false,  // Allows re-define variables later in code e.g. `var x=1; x=2;`.
+    "supernew"      : false,  // Tolerate `new function () { ... };` and `new Object;`.
+    "undef"         : true,   // Require all non-global variables be declared before they are used.
+
+    // Stylistic prefrences
+    "camelcase"     : true,   // Ensure camelCasing
+    "smarttabs"     : false,  // Supress warnings about smartTabs
+    "newcap"        : true,   // Require capitalization of all constructor functions e.g. `new F()`.
+    "noempty"       : true,   // Prohibit use of empty blocks.
+    "nonew"         : false,  // Prohibit use of constructors for side-effects.
+    "nomen"         : false,  // Prohibit use of initial or trailing underbars in names.
+    "onevar"        : false,  // Allow only one `var` statement per function.
+    "plusplus"      : false,  // Prohibit use of `++` & `--`.
+    "sub"           : true,   // Tolerate all forms of subscript notation besides dot notation e.g. `dict['key']` instead of `dict.key`.
+    "trailing"      : true,   // Prohibit trailing whitespaces.
+    "multistr"      : false,  // Supress warnings about multi-line Strings
+    "white"         : false   // Check against strict whitespace and indentation rules.
+}

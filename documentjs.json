@@ -3,7 +3,10 @@
 		"docs": {
 			"glob": "**/*.{js,md}",
 			"dest": "./docs",
-			"parent": "can-validate-library"
+			"parent": "can-validate-library",
+			"ignore": [
+				"{node_modules,target,test,coverage}/**/*"
+			]
 		}
 	}
 }

@@ -18,7 +18,7 @@
 * import 'can-validate/shims/validatejs.shim';
 *```
 *
-* @demo ./can-validate/map/validate/demo.html
+* @demo can-validate/demo/map/validate.demo.html
 *
 *
 */
@@ -53,7 +53,7 @@ var ErrorsObj = can.Map.extend({},{
 var defaultValidationOpts = {
 	mustValidate: false,
 	validateOnInit: false
-}
+};
 
 // add method to prototype that valdiates entire map
 can.extend(can.Map.prototype, {

@@ -30,7 +30,7 @@ function processOptions(opts){
 	}
 
 	return opts;
-};
+}
 
 var Shim = can.Construct.extend({
 	once: function (value, options, name) {
