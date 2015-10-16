@@ -1,6 +1,8 @@
 /* jshint asi: false */
 import can from 'can';
-import 'can-validate';
+import 'validate.js';
+import 'can-validate/shims/validatejs.shim';
+import 'can-validate/can-validate';
 import 'steal-qunit';
 
 var testValues = {
@@ -19,10 +21,6 @@ var testOptions = {
 		numercality: true
 	}
 }
-
-test('default property values', function () {
-	equal(true, true, 'Yep');
-});
 
 test('once', function () {
 	var errors = can.validate.once(testValues.stringTest, testOptions.stringTest);
