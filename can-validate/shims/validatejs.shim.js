@@ -32,17 +32,17 @@ var processOptions = function (opts) {
 
 var Shim = can.Construct.extend({
 	once: function (value, options, name) {
-		var errors = validatejs.single(value, processOptions(options));
 
-		// Add the name to the front of the error string
-		if (errors && name) {
-			for (var i = 0; i < errors.length; i++) {
-				// Attempt to prettyify the name in each error
-				errors[i] = can.capitalize(can.camelize(name)) + ' ' + errors[i];
-			}
-		}
+		var errorOptions = validatejs.extend({}, validatejs.single.options, {
+			format: 'flat'
+		});
+		var attrs = {};
+		var constraints = {};
 
-		return errors;
+		attrs[name] = value;
+		constraints[name] = processOptions(options);
+
+		return validatejs(attrs, constraints, errorOptions) || [];
 	},
 	isValid: function (value, options) {
 		var errors = validatejs.single(value, processOptions(options)) || [];
