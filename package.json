@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/canjs/can-validate",
   "devDependencies": {
+    "attr": "git+https://github.com/Macrofig/attr.git",
     "can": "^2.3.23",
     "chai": "^3.5.0",
     "documentjs": "^0.4.4",
