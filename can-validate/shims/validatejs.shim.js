@@ -51,7 +51,7 @@ var Shim = can.Construct.extend({
 	* @return {undefined|array} Returns undefined if no errors, otherwise returns
 	* a list of errors.
 	*/
-	once: function (value, options, name) {
+	once: function (value, options, name, otherItems) {
 		var errors = [];
 		var opts = [];
 		var validationOpts = [];
@@ -60,6 +60,7 @@ var Shim = can.Construct.extend({
 		if (name) {
 			// Since name exists, use the main validate method but just pass one
 			// property to it. Need to structure the objects it expects first.
+			opts = can.extend({}, otherItems);
 			opts[name] = value;
 			validationOpts[name] = processOptions(options);
 
