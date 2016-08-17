@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: contributing.md
+	@page can-validate-plugin/contributing-guide
+######################################################################## -->
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>Can-Validate - Contributing Guide </title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<!--[if lt IE 9]>
+   <script type="text/javascript" src="static/html5shiv.js"></script>
+    <!--<![endif]-->
+</head>
+
+<body class="docs">
+	
+	<header>
+		<nav class="container">
+
+			<div class="logo-menu">
+				<a class="brand" href="./index.html">Can-Validate</a>
+			</div>
+
+			<div class="pull-right">
+				<div class="bitovi-menu">
+					<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+					<ul class="dropdown-menu">
+						<li><a href="http://bitovi.com">Bitovi.com</a></li>
+						<li><a href="http://bitovi.com/blog/">Blog</a></li>
+						<li><a href="http://bitovi.com/design/">Design</a></li>
+						<li><a href="http://bitovi.com/development/">Development</a></li>
+						<li><a href="http://bitovi.com/training/">Training</a></li>
+						<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+						<li><a href="http://bitovi.com/people/">People</a></li>
+						<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+
+	
+<div class="container api">
+
+	
+	<nav class="sidebar">
+		
+		<ul class="api cascading primary-grouping"> 
+	
+		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="index.html" data-search="Can-Validate">
+				Can-Validate
+			</a>
+			
+		</li>
+		
+		
+			
+			<li class="search-container active">
+			<a class="sidebar-title" href="can-validate-plugin|contributing-guide.html" data-search="Contributing Guide">
+				Contributing Guide
+			</a>
+			
+		</li>
+			
+		
+	
+</ul>
+	</nav>
+	
+	
+	
+	<article class="content docs">
+	
+	
+		
+		<section class="title">
+			<div class="heading">
+<h1>Contributing Guide</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">can-validate-plugin/contributing-guide</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+		
+		
+		<section class="contents">
+		</section>
+		
+		
+		
+
+		
+		<section class="description">
+			<h1>Contribution Guide</h1>
+
+		</section>
+		
+
+		
+			
+		
+		
+		
+		
+
+		
+		<section class="comment">
+			<h2>Issues</h2>
+<p>The repository uses Github Issues to track changes and requirements. Github issues is a great tool as you can comment and communicate around a specific topic.</p>
+<h3>Using Issues</h3>
+<ul>
+<li>Be as detailed as possible with comments and descriptions.</li>
+<li>A picture (or motion capture) is worth a thousand words. :)</li>
+<li>Try your best to keep an issue updated and accurate.</li>
+<li>If you are working on a task, assign it to yourself.</li>
+<li>Utilize labels to categorize the issue for others to understand it's state</li>
+</ul>
+<h3>Creating an Issue</h3>
+<p>Use Github Issues to discuss or flag a feature or a bug. In a discussion issue, we can close it once a decision is made and create a new issue for the decided upon solution.</p>
+<p>Try to be as descriptive as possible in the issue. Features should have as many requirements as possible. Features should use the <a href="https://github.com/cucumber/cucumber/wiki/Gherkin">Gherkin syntax</a> whenever possible. This helps verify requirements are correct.</p>
+<p>In addition, for <strong>bugs</strong>, include a <a href="http://www.cockos.com/licecap/">LiceCap</a> screencapture of the bug, if possible. Also include reproduce steps or a url (if applicable).</p>
+<blockquote>
+<p>There is no such thing as a stupid question!</p>
+</blockquote>
+<p><strong>Comment on issues.</strong> If you feel it is important, then say something. Issues can serve as documentation and a learning tool, as much as it is also a tracking tool. So, asking a question, even if you feel it simple, can help others learn.</p>
+<h3>Resolving issues</h3>
+<p>Issues should only be closed in conjunction with a pull request or a specific label:</p>
+<ul>
+<li>Won't Fix</li>
+<li>Duplicate</li>
+</ul>
+<p>Make sure to always include a descriptive comment when closing an issue.</p>
+<p>Comments, in general, should avoid simple remarks like &quot;Closing issue&quot; or &quot;Fixed bug&quot;. Be descriptive.</p>
+<h2>Docs</h2>
+<p>The tech stack includes <a href="http://documentjs.com/">DocumentJS</a> which is a great tool that builds an HTML site from doc blocks in the code and from markdown files as well.</p>
+<p>Keeping the documentation up to date is important for others to complete items effectively. Changing an api or creating a new component can help someone else complete a task but only if they are aware of its existence and how to implement it.</p>
+<p>TODO: Include documentation rules and examples</p>
+<p>To build docs, run: <code>npm run docs</code>. This executes the documentation build script (it essentially just runs DocumentJS).</p>
+<h2>Tests</h2>
+<p>The tech stack includes <a href="https://qunitjs.com/">Qunit</a> for running tests. Using <a href="http://stealjs.com/">StealJS</a> to package the modules, we can run tests easily in the browser with a simple configuration.</p>
+<p>To run tests in a browser, run: <code>npm run develop</code>. This starts a web server on the root folder. You can then browse to the individual test.html files in the file structure.</p>
+<p>TO run tests in the console, run: <code>npm run tests</code>. This runs tests using <a href="https://github.com/bitovi/testee">Testee</a> and will open supported browsers or PhantomJS.</p>
+<h2>Code</h2>
+<p>Since this is a plugin for <a href="http://canjs.com/">CanJS</a>, the repo attempts to follow a specific structure to match the location of core components in the CanJS framework:</p>
+<ul>
+<li>can-validate</li>
+<li>map</li>
+<li>shims</li>
+<li>validations</li>
+</ul>
+<p>Each script should include the following:</p>
+<ul>
+<li>A working demo</li>
+<li>Documentation that renders when docs are built</li>
+<li>Passing tests</li>
+</ul>
+<h3>Cloning, git-flow</h3>
+<p>To get a copy of the code base, create a folder and clone the project using <code>git</code>. Branch from <code>master</code> or <code>minor</code> depending on what the issue is. Always work from a feature branch. Create branches that follow the <a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a> concepts.</p>
+<h3>Setting up local server</h3>
+<p>The tech stack includes <a href="http://stealjs.com/">StealJS</a> which is a module loader, among other things. Demos and the main index file will load Steal and compile the app on the fly. To run a local server simply run: <code>npm run develop</code>. Opening a browser to the resulting port, something like <code>localhost:3000</code> should open almost immediately.</p>
+<h3>Creating a Pull Request</h3>
+<p>Before opening a PR, make sure you verify your code. Run <code>npm run build</code>. This runs tests, a linting tool, and the build script. Verying that the entire script completes without errors will save you time.</p>
+<p>Once verified, push your code to your feature/bug branch and create the pull request. Your pull request should always merge into <code>minor</code> unless otherwise specified.  The <code>minor</code> branch is merged into <code>master</code> concurrently with a release.</p>
+<h3>Updating changelog</h3>
+<p>Please keep the changelog updated. <a href="http://keepachangelog.com/">This is a good place to start with adding to the changelog</a>.</p>
+
+		</section>
+		
+		
+
+		
+
+		
+	
+	
+	</article>
+	
+	
+
+</div>
+
+
+
+
+
+	
+	<footer>
+		<nav class="container">
+			<a class="brand javascriptmvc" href="index.html"></a>
+		</nav>
+	</footer>
+	
+	
+	<script type="text/javascript">
+		var docObject = {"type":"page","name":"can-validate-plugin/contributing-guide","src":"contributing.md","description":"# Contribution Guide","title":"Contributing Guide","glob":{"pattern":"**/*.{js,md}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/jorozco/projects/canjs/can-validate"},"dest":"/Users/jorozco/projects/canjs/can-validate/docs","generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+	
+	
+		<script>
+		  steal = {
+		    instantiated: {
+		      "bundles/static.css!$css" : null
+		    }
+		  }
+		</script>
+		<script type='text/javascript' 
+				data-main="static"
+				data-config="./static/config.js"
+				src="./static/steal.production.js"
+	    		bundles-path="bundles"></script>
+	
+</body>
+
+</html>

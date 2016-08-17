@@ -79,11 +79,18 @@
 			
 		</li>
 		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="can-validate-shims.html" data-search="Shims">
+				Shims
+			</a>
+			
+		</li>
+		
 		
 			
 			<li class="search-container active">
-			<a class="sidebar-title" href="can-validate-shims.html" data-search="Shims">
-				Shims
+			<a class="sidebar-title" href="validatejs-shim.html" data-search="ValidateJS Shim">
+				ValidateJS Shim
 			</a>
 			
 	<ul>
@@ -91,9 +98,9 @@
 			
 				
 				
-				<li class="search-container active ">
-					<a class="module" href="validatejs-shim.html" data-search="ValidateJS Shim">
-						ValidateJS Shim
+				<li class="search-container">
+					<a class="function" href="validatejs-shim.isValid.html" data-search="Is Valid">
+						Is Valid
 					</a>
 				</li>
 				
@@ -104,8 +111,20 @@
 				
 				
 				<li class="search-container">
-					<a class="module" href="validations-shim.html" data-search="Validations Shim">
-						Validations Shim
+					<a class="function" href="validatejs-shim.once.html" data-search="Once">
+						Once
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="function" href="validatejs-shim.validate.html" data-search="Validate">
+						Validate
 					</a>
 				</li>
 				
@@ -201,6 +220,27 @@ the passed in options so they can be properly used by the ValidateJS libarary.</
 		
 
 		
+		<section class="comment">
+			<h2>Initialization</h2>
+<p>Import ValidateJS, validate plugin and this shim to immediately use the
+ValidateJS in a CanJS project plugin.</p>
+<pre><code class="language-js">import 'validatejs';
+import 'can-validate/can-validate';
+import 'can-validate/shims/validatejs.shim';
+</code></pre>
+<h2>Usage</h2>
+<p>To validate a property, simply add a <code>validate</code> object with options that
+Validate.JS understands.</p>
+<p>Some options are aliased, like <code>required</code> is aliased to <code>presence</code>, for example.</p>
+<p>You can pass a function to a property like <code>required: function () {}</code>, provided
+the function returns the expected value of that validation. In the case above,
+it should return a boolean or a string. The function is converted into a compute
+which means that it will listen for changes and re-evaluate the function when
+changes are detected. This allows things like dynamic validations based on
+other values.</p>
+
+		</section>
+		
 		
 
 		
@@ -227,7 +267,7 @@ the passed in options so they can be properly used by the ValidateJS libarary.</
 	
 	
 	<script type="text/javascript">
-		var docObject = {"src":"can-validate/shims/validatejs.shim.js","line":0,"codeLine":9,"type":"module","description":"This shim requires ValidateJS in the consuming app's package.json. It processes\nthe passed in options so they can be properly used by the ValidateJS libarary.","title":"ValidateJS Shim","types":[{"type":"can.Construct"}],"name":"validatejs-shim","parent":"can-validate-shims","glob":{"pattern":"**/*.{js,md}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/jorozco/projects/Bitovi/canjs-org/can-validate"},"dest":"/Users/jorozco/projects/Bitovi/canjs-org/can-validate/docs","generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+		var docObject = {"src":"can-validate/shims/validatejs.shim.js","line":0,"codeLine":32,"type":"module","description":"This shim requires ValidateJS in the consuming app's package.json. It processes\n the passed in options so they can be properly used by the ValidateJS libarary.","title":"ValidateJS Shim","types":[{"type":"can.Construct"}],"name":"validatejs-shim","parent":"can-validate-shims","comment":" ","glob":{"pattern":"**/*.{js,md}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/jorozco/projects/canjs/can-validate"},"dest":"/Users/jorozco/projects/canjs/can-validate/docs","generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
 	</script>
 	
 	

@@ -1,14 +1,4 @@
-/**
-* @module {can.Construct} validations-shim Validations Shim
-* @parent can-validate-shims
-* @description
-* HEYO!
-*
-*
-*/
-
-
-//add shim
+// add shim
 steal('can', 'can-validate/validations', 'can-validate', 'can/observe', function (can, Validations) {
 	//var validate = new Validations();
 	var Shim = can.Construct.extend({

@@ -8,5 +8,20 @@ asyncTest("Basics works", function(){
 	}).then(start);
 });
 
+QUnit.module("jsonOptions");
+
+asyncTest("transform allows you to transform the json object", function(){
+	System.jsonOptions = {
+		transform: function(load, data){
+			delete data.priv;
+			return data;
+		}
+	};
+
+	System.import("test/another.json").then(function(a){
+		ok(!a.priv, "Private field excluded");
+	}).then(start);
+});
+
 
 QUnit.start();

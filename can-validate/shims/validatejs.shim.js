@@ -4,28 +4,47 @@
 * @description
 * This shim requires ValidateJS in the consuming app's package.json. It processes
 * the passed in options so they can be properly used by the ValidateJS libarary.
+* @body
+*
+* ## Initialization
+* Import ValidateJS, validate plugin and this shim to immediately use the
+* ValidateJS in a CanJS project plugin.
+* ```js
+* import 'validatejs';
+* import 'can-validate/can-validate';
+* import 'can-validate/shims/validatejs.shim';
+*```
+* ## Usage
+*
+* To validate a property, simply add a `validate` object with options that
+* Validate.JS understands.
+*
+* Some options are aliased, like `required` is aliased to `presence`, for example.
+*
+* You can pass a function to a property like `required: function () {}`, provided
+* the function returns the expected value of that validation. In the case above,
+* it should return a boolean or a string. The function is converted into a compute
+* which means that it will listen for changes and re-evaluate the function when
+* changes are detected. This allows things like dynamic validations based on
+* other values.
 *
 */
 
-import can from 'can';
+import can from 'can-validate/can-validate';
 import validatejs from 'validate.js';
 
-//add shim
-function processOptions(opts){
-	//check required
+var processOptions = function (opts) {
+	// check required
 	if (typeof opts.required !== 'undefined') {
-
-		if (typeof opts.required === 'object' || typeof opts.required === 'boolean') {
-			opts.presence = opts.required;
-		}
+		opts.presence = opts.required;
 		delete opts.required;
 	}
 
-	if (opts.hasOwnProperty('mustValidate') ) {
+	if (opts.hasOwnProperty('mustValidate')) {
 		delete opts.mustValidate;
 	}
 
-	if (opts.hasOwnProperty('validateOnInit') ) {
+	if (opts.hasOwnProperty('validateOnInit')) {
 		delete opts.validateOnInit;
 	}
 
@@ -33,32 +52,81 @@ function processOptions(opts){
 };
 
 var Shim = can.Construct.extend({
-	once: function (value, options, name) {
-		var errors = validatejs.single(value, processOptions(options));
 
-		// Add the name to the front of the error string
-		if (errors && name) {
-			for (var i = 0; i < errors.length; i++) {
-				// Attempt to prettyify the name in each error
-				errors[i] = can.capitalize(can.camelize(name)) + ' ' + errors[i];
+	/**
+	* @function once Once
+	* @description Validates a single property using provided validation options
+	* @param {*} value Some value to validate against.
+	* @param {Object} options Raw validation options. They will be processed since
+	* not all options are valid for ValidateJS.
+	* @param {string} name The key name of the value to validate. Used to prepend to
+	* error messages, if any.
+	* @return {undefined|array} Returns undefined if no errors, otherwise returns
+	* a list of errors.
+	*/
+	once: function (value, options, name) {
+		var errors = [];
+		var opts = [];
+		var validationOpts = [];
+
+		// Check if name was passed, determines which validate method to use
+		if (name) {
+			// Since name exists, use the main validate method but just pass one
+			// property to it. Need to structure the objects it expects first.
+			opts[name] = value;
+			validationOpts[name] = processOptions(options);
+
+			// Use main validate method, gives us better handling of custom messages
+			// and key path name prepending.
+			errors = validatejs(opts, validationOpts);
+
+			// can.Map.define expects an array of strings, but main validate method
+			// returns an object.
+			if (errors) {
+				errors = errors[name];
 			}
+		} else {
+			errors = validatejs.single(value, processOptions(options));
 		}
 
 		return errors;
 	},
+
+	/**
+	* @function isValid Is Valid
+	* @description Simply checks if the property value will validate or not, this
+	* method will not set errors, it is meant to check validity *before* a property
+	* is set.
+	* @param {*} value Some value to validate against.
+	* @param {Object} options Raw validation options. They will be processed since
+	* not all options are valid for ValidateJS.
+	* @return {boolean} True if valid, otherwise returns false
+	*/
 	isValid: function (value, options) {
 		var errors = validatejs.single(value, processOptions(options)) || [];
 
 		return errors.length === 0;
 	},
+
+	/**
+	* @function validate Validate
+	* @description
+	* @param {Object} values A map of properties to validate
+	* @param {Object} options Raw validation options. They will be processed since
+	* not all options are valid for ValidateJS. It should be a map of property keys
+	* which contain the respective validation properties.
+	* @return {undefined|array} Returns undefined if no errors, otherwise returns
+	* a list of errors.
+	*/
 	validate: function (values, options) {
-		var valueKeys = Object.keys(values), // <ie9 solution?
-			processedOpts = {};
+		// <ie9 solution?
+		var valueKeys = Object.keys(values);
+		var processedOpts = {};
 
 		// process options for each value
 		for (var i = 0; i < valueKeys.length; i++) {
 			var prop = valueKeys[i];
-			if ( options[prop] ) {
+			if (options[prop]) {
 				processedOpts[prop] = processOptions(options[prop]);
 			}
 		}
@@ -67,4 +135,5 @@ var Shim = can.Construct.extend({
 	}
 });
 
+// Register the shim
 can.validate.register('validatejs', new Shim());

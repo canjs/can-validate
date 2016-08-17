@@ -4,7 +4,7 @@
 
 	INSTEAD CHANGE:
 	source: readme.md
-	@page can-validate-library
+	@page can-validate-plugin
 ######################################################################## -->
 
 <!--[if lt IE 7]>
@@ -109,8 +109,20 @@
 				
 				
 				<li class="search-container">
-					<a class="module" href="validations.html" data-search="Validations">
-						Validations
+					<a class="page" href="changelog.html" data-search="Changelog">
+						Changelog
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="page" href="contributing-guide.html" data-search="Contributing Guide">
+						Contributing Guide
 					</a>
 				</li>
 				
@@ -145,7 +157,7 @@
 <div class="sub-heading">
 	
 	
-		<span class="module">can-validate-library</span>
+		<span class="module">can-validate-plugin</span>
 	
 	
 	
@@ -153,6 +165,8 @@
 </div>
 
 <ul class="links">
+	
+		<li><a href="http://canjs.github.io/can-validate/">Home</a></li>
 	
 	
 	
@@ -185,9 +199,72 @@
 
 		
 		<section class="comment">
-			<p>A plugin for CanJS that wraps any validation library to <code>can.validate</code>. Can.Validate doesn't do any validation of it's own but instead provides some abstraction to your library of choice which is added using a shim.</p>
-<p>The plugin also includes a plugin for <code>can.Map.define</code> that can be used to automatically check values as they are set to the property.</p>
+			<blockquote>
+<p><a href="http://canjs.github.io/can-validate/">Can-validate home</a></p>
+</blockquote>
+<p>A plugin for CanJS that wraps any validation library to <code>can.validate</code>. <strong>Can.Validate doesn't do any validation of its own</strong> but instead provides some abstraction to your library of choice. The chosen library is registered with can-validate using a shim.</p>
+<p>The plugin is made of three parts:</p>
+<ul>
+<li>Can-Validate core plugin</li>
+<li>A validation library shim</li>
+<li>Validation library</li>
+</ul>
+<p>Further more, the package also includes a <code>can.Map</code> plugin that works with the <code>can.Map.define</code> called <code>can.Map.validate</code>.</p>
+<h2>can-validate plugin</h2>
+<p>Adds the <code>validate</code> property to the <code>can</code> object. The <code>validate</code> object adds some useful methods for validation that simply forward arguments to the registered validation library.</p>
+<p>To add <code>can-validate</code> to your module, simply add the following lines:</p>
+<pre><code class="language-javascript">import can from 'can';
+// can.validate is now available
+import 'can-validate/can-validate';
+// Substitute with your library of choice
+import 'validate.js';
+// If not using ValidateJS, then you'll need a custom shim
+import 'can-validate/shims/validatejs.shim';
+</code></pre>
+<p>From this point you could do the following:</p>
+<pre><code class="language-javascript">var myVal = '';
+var validateOpts = {myVal: {required: true}};
+
+// `errors` will have an error because the value is empty
+//  and required is true.
+var errors = can.validate.once(myVal, validateOpts);
+</code></pre>
+<h3>Shims and Validation Libraries</h3>
+<p>A shim registers a validation library with can-validate. It also processes properties and values into a structure more acceptable by the validation library. This allows consuming libraries to switch validation libraries simply by switching out their shim - any new behavior or legacy behavior can be baked into the new shim.</p>
 <p>Don't have a library of choice? Can.Validate ships with a shim for CanJS Validations and <a href="http://validatejs.org/">ValidateJS</a>.</p>
+<h2>can.Map.validate plugin</h2>
+<pre><code class="language-javascript">import can from 'can';
+import 'can/map/define/define';
+// can.validate is now available
+import 'can-validate/can-validate';
+// Substitute with your library of choice
+import 'validate.js';
+// If not using ValidateJS, then you'll need a custom shim
+import 'can-validate/shims/validatejs.shim';
+
+// Augments the can.Map setter
+import 'can-validate/map/validate';
+</code></pre>
+<p>All can.Map's created in the module will now have an augmented setter that checks properties as they are set. This allows the following...</p>
+<pre><code class="language-javascript">var ViewModel = can.Map.extend({
+  define: {
+    name: {
+      value: '',
+      validate: {
+        required: true
+      }
+    }
+  }
+});
+var viewModel = new ViewModel({});
+viewModel.validate();
+// `errors` will have an error because the `name` value is empty
+//  and required is true.
+viewModel.attr('errors');
+viewModel.attr('name', 'Juan');
+viewModel.attr('errors'); // =&gt; Errors is now empty!
+</code></pre>
+<h2>Documentation</h2>
 <p>The docs cover the following topics:</p>
 <ul>
 <li>can.validate core</li>
@@ -198,9 +275,13 @@
 </ul>
 <p>Check out the demos as well:</p>
 <ul>
-<li>Can.Validate</li>
-<li>Can.Map.Validate</li>
+<li><a href="http://canjs.github.io/can-validate/can-validate.html">Can.Validate</a></li>
+<li><a href="http://canjs.github.io/can-validate/can.Map.validate.html">Can.Map.Validate</a></li>
 </ul>
+<h3>Change Log</h3>
+<p>A change log is maintained <a href="changelog.html">here</a>.</p>
+<h3>Contributing</h3>
+<p>Want to contribute? <a href="contributing.html">Read the contributing</a> guide to start.</p>
 
 		</section>
 		
@@ -230,7 +311,7 @@
 	
 	
 	<script type="text/javascript">
-		var docObject = {"type":"page","name":"can-validate-library","src":"readme.md","description":"# Can Validate","title":"Can-Validate","glob":{"pattern":"**/*.{js,md}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/jorozco/projects/Bitovi/canjs-org/can-validate"},"dest":"/Users/jorozco/projects/Bitovi/canjs-org/can-validate/docs","generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+		var docObject = {"type":"page","name":"can-validate-plugin","src":"readme.md","description":"# Can Validate","title":"Can-Validate","links":[{"href":"http://canjs.github.io/can-validate/","title":"Home"}],"glob":{"pattern":"**/*.{js,md}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/jorozco/projects/canjs/can-validate"},"dest":"/Users/jorozco/projects/canjs/can-validate/docs","generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
 	</script>
 	
 	
