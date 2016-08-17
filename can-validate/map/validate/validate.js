@@ -235,16 +235,17 @@ can.extend(can.Map.prototype, {
 	*
 	* @param {object} item A key/value object
 	* @param {object} opts Object that contains validation config.
+	* @param {object} otherItems Object that contains other attributes in the map
 	* @return {boolean} True if method found that the property can be saved; if
 	*  validation fails and the property must validate (`mustValidate` property),
 	*  this will be `false`.
 	*/
-	_validateOne: function (item, opts) {
+	_validateOne: function (item, opts, otherItems) {
 		var errors;
 		var allowSet = true;
 
 		// run validation
-		errors = can.validate.once(item.value, can.extend({}, opts), item.key);
+		errors = can.validate.once(item.value, can.extend({}, opts), item.key, otherItems);
 
 		// Process errors if we got them
 		if (errors && errors.length > 0) {
@@ -303,7 +304,7 @@ can.extend(can.Map.prototype, {
 		can.each(computes, function (item) {
 			item.compute.bind('change', function () {
 				itemObj.value = self.attr(itemObj.key);
-				self._validateOne(itemObj, processedObj);
+				self._validateOne(itemObj, processedObj, self.attr());
 			});
 		});
 
@@ -325,7 +326,7 @@ proto.__set = function (prop, value, current, success, error) {
 		// If validate opts are set and initing, validate properties only if validateOnInit is true
 		if ((validateOpts && !mapIniting) || (validateOpts && mapIniting && validateOpts.validateOnInit)) {
 			// Validate item
-			allowSet = this._validateOne({key: prop, value: value}, validateOpts);
+			allowSet = this._validateOne({key: prop, value: value}, validateOpts, this.attr());
 		}
 	}
 
