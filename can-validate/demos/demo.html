@@ -50,13 +50,13 @@
 		</script>
 	</div>
 	<script type='text/javascript'>
-		steal('can','can-validate/', 'can-validate/shims/validatejs.shim', function(can){
+		steal('jquery', 'can','can-validate/', 'can-validate/shims/validatejs.shim', function($, can){
 			var validations = {
 				myVal: {
 					required: true,
 					length: {
 						minimum: 6,
-						message: "My custom message"
+						message: '^My custom message'
 					},
 				},
 				myNum: {
@@ -72,9 +72,9 @@
 				myNum: 100,
 				errors: [],
 				validateField: function (ctx, $el) {
-					var $parent = $el.parents('.input-group'),
-						$label = can.$('label[for=' + $parent.find('.form-control').attr('id') + ']'),
-						val = $parent.data('field');
+					var $parent = $el.parents('.input-group');
+					var $label = $('label[for=' + $parent.find('.form-control').attr('id') + ']');
+					var val = $parent.data('field');
 
 					var errors = can.validate.once(this.attr(val), validations[val], 'myObjIsAwesome');
 					if (errors) {

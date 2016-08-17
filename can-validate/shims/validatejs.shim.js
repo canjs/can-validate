@@ -14,6 +14,19 @@
 * import 'can-validate/can-validate';
 * import 'can-validate/shims/validatejs.shim';
 *```
+* ## Usage
+*
+* To validate a property, simply add a `validate` object with options that
+* Validate.JS understands.
+*
+* Some options are aliased, like `required` is aliased to `presence`, for example.
+*
+* You can pass a function to a property like `required: function () {}`, provided
+* the function returns the expected value of that validation. In the case above,
+* it should return a boolean or a string. The function is converted into a compute
+* which means that it will listen for changes and re-evaluate the function when
+* changes are detected. This allows things like dynamic validations based on
+* other values.
 *
 */
 

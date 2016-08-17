@@ -33,9 +33,10 @@
   },
   "homepage": "https://github.com/canjs/can-validate",
   "devDependencies": {
-    "attr": "git+https://github.com/Macrofig/attr.git",
+    "attr": "^3.0.2",
     "can": "^2.3.23",
     "chai": "^3.5.0",
+    "debug": "^2.2.0",
     "documentjs": "^0.4.4",
     "jquery": "^2.2.3",
     "mocha": "^2.5.3",
@@ -86,6 +87,7 @@
     }
   },
   "xo": {
+    "space": 4,
     "envs": [
       "node",
       "mocha"

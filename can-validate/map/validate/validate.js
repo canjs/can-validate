@@ -49,7 +49,7 @@
 *```
 *
 * ## Demo
-* @demo ./can-validate/map/validate/demo.html
+* @demo can-validate/demos/map/demo.html
 *
 *
 */
@@ -61,6 +61,7 @@ import ErrorsObj from 'can-validate/utils/errors.map';
 // Default validation options to extend passed options from
 import defaultValidationOpts from 'can-validate/utils/default-validate-opts';
 import mapHelpers from 'can-validate/utils/map-methods';
+import {getPropDefineBehavior,initProperty, getValidateFromCache,evalComputes,initValidation} from 'can-validate/utils/map-helpers';
 
 var proto = can.Map.prototype;
 var oldSet = proto.__set;
@@ -99,7 +100,7 @@ proto.__set = function (prop, value, current, success, error) {
 		initProperty.call(this, prop, value);
 		// Get processed validation properties
 		validateOpts = getValidateFromCache.call(this)[prop];
-		validateOpts = resolveComputes({key: prop, value: value}, validateOpts);
+		validateOpts = evalComputes({key: prop, value: value}, validateOpts);
 		// If validate opts are set and not initing then validate properties
 		// If validate opts are set and initing, validate properties only if validateOnInit is true
 		if ((validateOpts && !mapIniting) || (validateOpts && mapIniting && validateOpts.validateOnInit)) {

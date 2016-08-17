@@ -1,6 +1,8 @@
-import attr from 'attr';
+import can from 'can';
+import Attr from 'attr';
+import defaultValidationOpts from 'can-validate/utils/default-validate-opts';
 
-var initValidation = function () {
+export function initValidation () {
     var self = this;
     var validateCache = getValidateFromCache.call(this);
     can.each(this.define, function (props, key) {
@@ -10,7 +12,7 @@ var initValidation = function () {
     });
 };
 
-var evalComputes = function (itemObj, opts) {
+export function evalComputes (itemObj, opts) {
 	var processedObj = {};
 
 	// Loop through each validation option
@@ -27,7 +29,7 @@ var evalComputes = function (itemObj, opts) {
 };
 
 // Gets properties from the map's define property.
-var getPropDefineBehavior = function (behavior, attr, define) {
+export function getPropDefineBehavior (behavior, attr, define) {
 	var prop;
 	var defaultProp;
 
@@ -45,13 +47,13 @@ var getPropDefineBehavior = function (behavior, attr, define) {
 	}
 };
 
-var ValidateCache = can.Construct.extend({
+export const ValidateCache = can.Construct.extend({
     options: [],
-    attr: attr()
+    attr: Attr()
 });
 
-var getValidateFromCache = function () {
-	var validateCacheKey = '__' + config.validateOptionCacheKey;
+export function getValidateFromCache () {
+	var validateCacheKey = '__validateOptions';
 
 	// Create cache object in map instance, if it doesn't exist
 	if (!this[validateCacheKey]) {
@@ -74,7 +76,7 @@ var getValidateFromCache = function () {
 * @param {object} itemObj Property to validate
 * @param {object} opts Map of validation options
 */
-var createComputes = function (itemObj, opts) {
+export function createComputes (itemObj, opts) {
     var processedObj = {};
     var computes = [];
     var self = this;
@@ -103,7 +105,7 @@ var createComputes = function (itemObj, opts) {
     return processedObj;
 }
 
-var initProperty = function (key, value) {
+export function initProperty (key, value) {
 	var validateOpts;
 	var mapValidateCache;
 	var propIniting;

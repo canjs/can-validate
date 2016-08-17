@@ -1,6 +1,8 @@
-import {}
+import can from 'can';
+import ErrorsObj from './errors.map';
+import {getValidateFromCache, evalComputes} from './map-helpers';
 
-const helpers = {
+export default {
 	/**
 	* @function validate Validate
 	* @deprecated {1.0} `validate` is deprecated and will be removed in version 1.0.
@@ -26,7 +28,7 @@ const helpers = {
 		// Loop through validate options
 		can.each(this.define, function (value, key) {
 			if (value.validate) {
-				processedOpts[key] = resolveComputes({key: key, value: self.attr(key)}, validateOpts[key]);
+				processedOpts[key] = evalComputes({key: key, value: self.attr(key)}, validateOpts[key]);
 			}
 		});
 		var errors = can.validate.validate(this.serialize(), processedOpts);
@@ -82,5 +84,4 @@ const helpers = {
 
 		return allowSet;
 	}
-}
-export default helpers;
+};

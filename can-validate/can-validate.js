@@ -29,7 +29,7 @@
 *```
 * You can use any of the methods at `can.validate`.
 *
-* @demo ./can-validate/demo.html
+* @demo can-validate/demos/demo.html
 *
 *
 */
