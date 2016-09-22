@@ -17,7 +17,8 @@
 *
 */
 
-import can from 'can-validate/can-validate';
+import Construct from 'can-construct';
+import canValidate from 'can-validate/can-validate';
 import validatejs from 'validate.js';
 
 var processOptions = function (opts) {
@@ -38,7 +39,7 @@ var processOptions = function (opts) {
 	return opts;
 };
 
-var Shim = can.Construct.extend({
+var Shim = Construct.extend({
 
 	/**
 	* @function once Once
@@ -123,4 +124,4 @@ var Shim = can.Construct.extend({
 });
 
 // Register the shim
-can.validate.register('validatejs', new Shim());
+canValidate.register('validatejs', new Shim());
