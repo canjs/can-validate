@@ -1,9 +1,10 @@
 /* jshint asi: false */
-import can from 'can';
+import canMap from 'can-map';
+import 'can-map-define';
 import 'can-validate/map/validate/validate';
 import 'steal-qunit';
 
-var ValidatedMap = can.Map.extend({
+var ValidatedMap = canMap.extend({
 	define: {
 		myNumber: {
 			value: 100,

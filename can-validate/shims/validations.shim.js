@@ -1,7 +1,7 @@
 // add shim
-steal('can', 'can-validate/validations', 'can-validate', 'can/observe', function (can, Validations) {
+steal('can-construct', 'can-validate/validations', 'can-validate', 'can/observe', function (Construct, Validations, canValidate) {
 	//var validate = new Validations();
-	var Shim = can.Construct.extend({
+	var Shim = Construct.extend({
 		once: function (value, options) {
 			return Validations.validate(value, options);
 		},
@@ -12,6 +12,5 @@ steal('can', 'can-validate/validations', 'can-validate', 'can/observe', function
 			return Validations.validate(values, options);
 		}
 	});
-
-	can.validate.register('validations', new Shim());
+	canValidate.register('validations', new Shim());
 });

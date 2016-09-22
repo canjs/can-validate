@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="app" class="container">
-		<script src="../../node_modules/steal/steal.js" main="can/view/autorender/"></script>
+		<script src="../../node_modules/steal/steal.js" main="can-view-autorender"></script>
 		<script type='text/stache' id="demo" can-autorender>
 			<h1>can.validate Demo</h1>
 
@@ -31,16 +31,16 @@
 					<form>
 						<label for="test1">MyVal <span class="text-danger"></span></label>
 						<div class="input-group" {{data 'field' 'myVal'}}>
-							<input class="form-control" id="test1" type="text" can-value="myVal">
+							<input class="form-control" id="test1" type="text" {($value)}="myVal">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" can-click="validateField">Validate</button>
+								<button type="button" class="btn btn-default" ($click)="validateField">Validate</button>
 							</span>
 						</div>
 						<label for="test2">MyNum <span class="text-danger"></span></label>
 						<div class="input-group" {{data 'field' 'myNum'}}>
-							<input class="form-control" id="test2" type="text" can-value="myNum">
+							<input class="form-control" id="test2" type="text" {($value)}="myNum">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" can-click="validateField">Validate</button>
+								<button type="button" class="btn btn-default" ($click)="validateField">Validate</button>
 							</span>
 						</div>
 					</form>
@@ -50,7 +50,9 @@
 		</script>
 	</div>
 	<script type='text/javascript'>
-		steal('can','can-validate/', 'can-validate/shims/validatejs.shim', function(can){
+		steal('jquery/dist/jquery.js', 'can-validate/', 'can-view-model', 'can-util/dom/data/', 'can-validate/shims/validatejs.shim', 'can-stache-bindings', function($, canValidate, setViewModel, domData){
+		window.getViewModel = setViewModel;
+			canValidate = canValidate.default;
 			var validations = {
 				myVal: {
 					required: true,
@@ -67,16 +69,17 @@
 				}
 			};
 
-			can.$('#demo').viewModel({
+			setViewModel(document.getElementById('demo'), {
 				myVal: 'testing testing',
 				myNum: 100,
 				errors: [],
-				validateField: function (ctx, $el) {
+				validateField: function (ctx, el) {
+					var $el = $(el);
 					var $parent = $el.parents('.input-group'),
-						$label = can.$('label[for=' + $parent.find('.form-control').attr('id') + ']'),
-						val = $parent.data('field');
+						$label = $('label[for=' + $parent.find('.form-control').attr('id') + ']'),
+						val = domData.get.call($parent[0], 'field');
 
-					var errors = can.validate.once(this.attr(val), validations[val], 'myObjIsAwesome');
+					var errors = canValidate.once(this.attr(val), validations[val], 'myObjIsAwesome');
 					if (errors) {
 						$parent.addClass('has-error');
 						$label.find('.text-danger').text(errors[0]);

@@ -17,7 +17,9 @@
 *
 */
 
-import can from 'can-validate/can-validate';
+import Construct from 'can-construct';
+import deepAssign from 'deep-assign';
+import canValidate from 'can-validate/can-validate';
 import validatejs from 'validate.js';
 
 var processOptions = function (opts) {
@@ -38,7 +40,7 @@ var processOptions = function (opts) {
 	return opts;
 };
 
-var Shim = can.Construct.extend({
+var Shim = Construct.extend({
 
 	/**
 	* @function once Once
@@ -51,7 +53,7 @@ var Shim = can.Construct.extend({
 	* @return {undefined|array} Returns undefined if no errors, otherwise returns
 	* a list of errors.
 	*/
-	once: function (value, options, name) {
+	once: function (value, options, name, otherItems) {
 		var errors = [];
 		var opts = [];
 		var validationOpts = [];
@@ -60,6 +62,7 @@ var Shim = can.Construct.extend({
 		if (name) {
 			// Since name exists, use the main validate method but just pass one
 			// property to it. Need to structure the objects it expects first.
+			opts = deepAssign({}, otherItems);
 			opts[name] = value;
 			validationOpts[name] = processOptions(options);
 
@@ -123,4 +126,4 @@ var Shim = can.Construct.extend({
 });
 
 // Register the shim
-can.validate.register('validatejs', new Shim());
+canValidate.register('validatejs', new Shim());

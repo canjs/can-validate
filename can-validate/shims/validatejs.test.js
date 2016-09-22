@@ -1,6 +1,6 @@
 /* jshint asi: false */
-import can from 'can';
-import 'can/map/define/';
+import canMap from 'can-map';
+import 'can-map-define';
 import 'can-validate/can-validate';
 import 'can-validate/map/validate/';
 import 'can-validate/shims/validatejs.shim';
@@ -8,7 +8,7 @@ import 'chai';
 import 'steal-mocha';
 const expect = chai.expect;
 let validatedMap;
-const ValidatedMap = can.Map.extend({
+const ValidatedMap = canMap.extend({
 	define: {
 		myNumber: {
 			value: 'test',

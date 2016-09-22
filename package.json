@@ -33,14 +33,19 @@
   },
   "homepage": "https://github.com/canjs/can-validate",
   "devDependencies": {
-    "can": "^2.3.23",
+    "can-map-define": "^3.0.0",
+    "can-stache": "^3.0.1",
+    "can-stache-bindings": "^3.0.1",
+    "can-view-autorender": "^3.0.0",
+    "can-view-model": "^3.0.0",
     "chai": "^3.5.0",
     "documentjs": "^0.4.4",
-    "jquery": "^2.2.3",
-    "mocha": "^2.5.3",
-    "steal": "^0.16.2",
+    "jquery": "^3.1.1",
+    "mocha": "^3.1.2",
+    "steal": "^0.16.41",
     "steal-mocha": "0.0.3",
-    "steal-tools": "^0.16.1",
+    "steal-stache": "^3.0.0",
+    "steal-tools": "^0.16.8",
     "testee": "^0.2.5",
     "validate.js": "^0.10.0",
     "xo": "^0.15.1"
@@ -104,5 +109,12 @@
       "dist/**",
       "docs/**"
     ]
+  },
+  "dependencies": {
+    "can-compute": "^3.0.0",
+    "can-construct": "^3.0.1",
+    "can-map": "^3.0.1",
+    "can-util": "^3.0.1",
+    "deep-assign": "^2.0.0"
   }
 }
