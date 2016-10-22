@@ -1,16 +1,17 @@
 /* jshint asi: false */
-import can from 'can';
-import 'can/map/define/';
+import canMap from 'can-map';
+import 'can-map-define';
 import 'can-validate';
 import 'can-validate/map/validate/';
 import 'can-validate/shims/validatejs.shim';
+import isEmptyObject from 'can-util/js/is-empty-object/';
 import 'chai';
 import 'steal-mocha';
 var expect = chai.expect;
 var validatedMap;
 var secondaryMap;
 
-var ValidatedMap = can.Map.extend({
+var ValidatedMap = canMap.extend({
 	define: {
 		myNumber: {
 			value: 100,
@@ -40,7 +41,7 @@ describe('Validate can.Map define plugin', function () {
 				validatedMap = new ValidatedMap();
 			});
 			it('does not validate', function () {
-				expect(can.isEmptyObject(validatedMap.errors)).to.equal(true);
+				expect(isEmptyObject(validatedMap.errors)).to.equal(true);
 			});
 		});
 	});
@@ -95,7 +96,7 @@ describe('Validate can.Map define plugin', function () {
 		});
 		it('control map validates successfully', function () {
 			secondaryMap.attr('computedProp', '');
-			expect(can.isEmptyObject(secondaryMap.attr('errors'))).to.equal(true);
+			expect(isEmptyObject(secondaryMap.attr('errors'))).to.equal(true);
 		});
 		it('other map validates, sets error', function () {
 			validatedMap.attr('computedProp', '');

@@ -3,12 +3,12 @@ var proc;
 var attrName;
 
 // Copies old map validation plugin stuff
-steal('can', function (can) {
+steal('can-construct', 'can-util/js/each/each', 'can-util/js/string/string', function (Construct, canEach, stringUtils) {
 	// validations object is by property.  You can have validations that
 	// span properties, but this way we know which ones to run.
 	//  proc should return true if there's an error or the error message
 
-	return can.Construct.extend({
+	return Construct.extend({
 		once: function (value, options, key) {
 			var errors = [];
 
@@ -23,7 +23,7 @@ steal('can', function (can) {
 			var errors = [];
 			options = options || {};
 
-			can.each(values, function (attrName) {
+			canEach(values, function (attrName) {
 				var opts = options[attrName];
 				var validator;
 				// Add a test function for each attribute
@@ -32,7 +32,7 @@ steal('can', function (can) {
 				}
 
 				opts.each(function (opt, key) {
-					validator = validator + 'validate' + can.capitalize(key) + 'Of';
+					validator = validator + 'validate' + stringUtils.capitalize(key) + 'Of';
 				});
 
 				errors[attrName].push(function (newVal) {
