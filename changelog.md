@@ -2,7 +2,7 @@
 @parent can-validate-plugin
 # Change log
 
-## [1.0.0.pre-0]
+## [1.0.0.pre]
 
 ### Removed
 
@@ -15,7 +15,7 @@
 - `test` method, behaves similarly as `isValid` but also sets errors
 - `errors` method to retrieve errors
 - Register validator and library methods
-- Extend method for plugins
+- Extend method for plugins using can-construct
 
 ## [0.9.2] - 2015-06-02
 

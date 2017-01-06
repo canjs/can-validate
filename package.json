@@ -59,6 +59,7 @@
     "transpiler": "babel"
   },
   "dependencies": {
+    "can-construct": "^3.0.6",
     "can-util": "^3.2.2"
   },
   "bit-docs": {

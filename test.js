@@ -33,6 +33,15 @@ QUnit.test('set validator for validations',function(){
     QUnit.ok(validate.validations.test === noop);
 });
 
+QUnit.test('extending main constructor', function () {
+    var testString = 'hello';
+    var NewValidate = Validate.extend({
+        test: testString
+    });
+    var newValidate = new NewValidate();
+    QUnit.equal(newValidate instanceof Validate, true);
+    QUnit.equal(newValidate.test, testString);
+});
 
 QUnit.test('when testing a value for validity',function(){
     var requiredMessage = 'is required';
