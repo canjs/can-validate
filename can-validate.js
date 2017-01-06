@@ -1,154 +1,67 @@
-/**
-* @module {can.Construct} can-validate Can-Validate
-* @parent can-validate-plugin
-* @group can-validate.validators 0 Validate Methods
-* @group can-validate.utils 1 Utilities
-* @description
-*  The core of can.validate, this script adds abstraction methods to can.validate
-*   that call corresponding methods in the chosen shim. The shim does any value and
-*   validation option manipulation, calls library validation methods, and returns errors.
-*
-*  Shims, in the case of errors, should return an array of errors. Otherwise, the
-*   shim should return undefined.
-*
-* @signature 'can.validate'
-* Validate is a can.Construct that is set to can.validate. It is possible to create
-* an instance for the purpose of storing errors in the instance. It is recommended
-* to use can.Map, can.Map.define, and can.Map.validate instead.
-*
-* @body
-*
-* ## Initialization
-* Require/Import `can-validate` into your application after `can` and `can.validate`
-*  will be available immediately. Make sure to also load your libarary and the
-*  appropriate shim.
-* ```js
-* import 'validatejs';
-* import 'can-validate/can-validate';
-* import 'can-validate/shims/validatejs.shim';
-*```
-* You can use any of the methods at `can.validate`.
-*
-* @demo ./can-validate/demo.html
-*
-*
-*/
-var dev = require("can-util/js/dev/dev");
-var namespace = require("can-util/namespace");
+var validate = require('can-validate/lib/validate');
 
-// add methods to can
-var Validate = {
+var Validate = function () {
+    if (!(this instanceof Validate)) {
+        return new Validate();
+    }
 
-	/*
-	* @description The current validator ID to use when can.validate methods are called.
-	*/
-	_validatorId: '',
-
-	/*
-	* @description A map of validator libraries loaded into can.validate.
-	*/
-	_validators: {},
-
-	/**
-	* @function can-validate.validator Validator
-	* @parent can-validate.utils
-	* @description Registers a library with can.validate. The last one registered is the default library.
-	* Override the default by changing `_validatorId` to the key of the desired registered library.
-	* ```js
-	* Validate.register('validatejs',validatejs);
-	* ```
-	* @param {string} id The key name of the validator library.
-	* @param {object|function} validator The validator libarary. Only pass instances.
-	*/
-	validator: function () {
-		return this._validators[this._validatorId];
-	},
-
-	/**
-	* @function can-validate.register Register
-	* @parent can-validate.utils
-	* @description Registers a library with can.validate. The last one registered is the default library.
-	* Override the default by changing `_validatorId` to the key of the desired registered library.
-	* ```js
-	* Validate.register('validatejs',validatejs);
-	* ```
-	* @param {string} id The key name of the validator library.
-	* @param {object|function} validator The validator libarary. Only pass instances.
-	*/
-	register: function (id, validator) {
-		this._validatorId = id;
-		this._validators[id] = validator;
-	},
-
-	/**
-	* @function can-validate.isValid Is Valid
-	* @parent can-validate.validators
-	* @description Registers a library with can.validate. The last one registered is the default library.
-	* Override the default by changing `_validatorId` to the key of the desired registered library.
-	* ```js
-	* Validate.isValid('', {}, 'myVal');
-	* ```
-	* @param {*} value A value of any type to validate.
-	* @param {object} options Validation config object, structure depends on the
-	*  validation library used.
-	* @param {string} name Optional. The key name of the value.
-	*/
-	isValid: function () {
-		//!steal-remove-start
-		if (!this._validatorId) {
-			dev.warn('A validator library is required for can.validate to work properly.');
-		}
-		//!steal-remove-end
-		return this.validator().isValid.apply(this, arguments);
-	},
-
-	/**
-	* @function can-validate.once Once
-	* @parent can-validate.validators
-	* @description Registers a library with can.validate. The last one registered is the default library.
-	* Override the default by changing `_validatorId` to the key of the desired registered library.
-	* ```js
-	* Validate.once('', {}, 'myVal');
-	* ```
-	* @param {*} value A value of any type to validate.
-	* @param {object} options Validation config object, structure depends on the
-	*  validation library used.
-	* @param {string} name Optional. The key name of the value.
-	*/
-	once: function () {
-		//!steal-remove-start
-		if (!this._validatorId) {
-			dev.warn('A validator library is required for can.validate to work properly.');
-		}
-		//!steal-remove-end
-		return this.validator().once.apply(this, arguments);
-	},
-
-	/**
-	* @function can-validate.validate Validate
-	* @parent can-validate.validators
-	* @description
-	* ```js
-	* Validate.validate({},{});
-	* ```
-	* @param {object} values A map of the different objects to validate.
-	* @param {object} options Validation config object, structure depends on the
-	*  validation library used.
-	*/
-	validate: function () {
-		var validateArgs = arguments;
-		//!steal-remove-start
-		if (!this._validatorId) {
-			dev.warn('A validator library is required for can.validate to work properly.');
-		}
-		if (typeof arguments[0] !== 'object') {
-			dev.warn('Attempting to pass single value to validate, use can.validator.once instead.');
-		}
-		//!steal-remove-end
-		return this.validator().validate.apply(this, validateArgs);
-	}
+    this.validations = {};
+    this.library = {};
 };
 
-namespace.validate = Validate;
+/**
+ * Makes it easier to extend Validate class, calls constructor and copies prototype.
+ */
+Validate.extend = function (Constructor) {
+    var TempClass = function () {
+        Validate.apply(this, arguments);
+        Constructor.apply(this, arguments);
+    };
+
+    // Tack on the Validate prototype
+    Constructor.prototype = helpers.createObject(Validate.prototype);
+    // It is possible for a plugin to add to the prototype
+    TempClass.prototype = helpers.createObject(Constructor.prototype);
+    return TempClass;
+};
+
+Validate.prototype.registerLibrary = function (key, shim) {
+    // TODO This check may need improving
+    if (key && shim && shim.test) {
+        this.library = {
+            name: key,
+            shim: shim
+        };
+        return true;
+    } else {
+        return false;
+    }
+};
+
+Validate.prototype.registerValidator = function (key, validator) {
+  // TODO: Is there a better way to register these?
+  // Will overwrite previous validators, is that cool?
+  this.validations[key] = validator;
+};
+
+// TODO This should be a compute
+Validate.prototype.errors = function () {
+    return this._errors || [];
+};
+
+// Validate.prototype.constraints = function (constraints) {
+//   this['_constraints'] = constraints;
+// };
+//
+// Validate.prototype.value = function (value) {
+//   this.value = value;
+// };
+
+Validate.prototype.constructor = Validate;
+
+Validate.prototype.test = function (value, constraints) {
+    this._errors = validate.validateValue.call(this, value, constraints);
+    return this.errors().length === 0;
+};
 
 module.exports = Validate;
