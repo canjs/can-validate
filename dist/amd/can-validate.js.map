@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../can-validate.js"],"names":["formatErrors","require","validate","module","exports"],"mappings":";;IAAA,IAAIA,YAAA,GAAeC,OAAA,CAAQ,+BAAR,CAAnB,C;IACA,IAAIC,QAAA,GAAW,EAAf,C;IAEAA,QAAA,CAASF,YAAT,GAAwBA,YAAxB,C;IAEAG,MAAA,CAAOC,OAAP,GAAiBF,QAAjB,C","file":"can-validate.js"}
