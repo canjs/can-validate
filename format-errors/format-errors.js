@@ -1,62 +1,77 @@
 var each = require('can-util/js/each/each');
+var isArray = require('can-util/js/is-array/is-array');
 
 var helpers = {
     'object': function (errors) {
         var resp = {};
-        each(errors.map, function (errorList, key) {
+        var addToRelated = function (key, msg) {
             if (!resp[key]) {
                 resp[key] = [];
             }
-            each(errorList, function (error) {
-                resp[key].push(error.message);
-            });
+            resp[key].push(msg);
+        };
+
+        each(errors, function (error) {
+            // If related exists, use that as the key
+            if (error.related) {
+                // Check if there are many related keys
+                if (isArray(error.related)) {
+                    // Copy error for each related key
+                    each(error.related, function (related) {
+                        addToRelated(related, error.message);
+                    });
+                } else {
+                    // Only one related key
+                    addToRelated(error.related, error.message);
+                }
+            } else {
+                // No key specified so put it with the catch all
+                addToRelated('*', error.message);
+            }
         });
         return resp;
     },
     'flat': function (errors) {
         var resp = [];
-        each(errors.list, function (error) {
+        each(errors, function (error) {
             resp.push(error.message);
         });
         return resp;
     },
     'errors': function (errors) {
-        return errors.list;
+        return errors;
     },
 };
 
-// Takes errors and normalizes them into a map and a list.
-var normalizeErrors = function (errors, key) {
-    var resp = {
-        map: {},
-        list: []
-    };
-
-    // Attempt to use key for the map, otherwise, make one up
-    if (!key) {
-        key = '0';
-    }
-
-    // Only one error set, which we can assume was for a single property
+var parseErrorItem = function (errors) {
+    var resp = [];
     if (typeof errors === 'string') {
-        var list = [];
-        var errorItem = {message: errors, related: [key]};
-        list.push(errorItem);
-        resp.map[key] = list;
-        resp.list = list;
-    } else {
-        each(errors, function (error) {
-            if (error.related && error.related.length > 0) {
-                each(error.related, function (relatedKey) {
-                    if (!resp.map[relatedKey]) {
-                        resp.map[relatedKey] = [];
-                    }
-                    resp.map[relatedKey].push(error);
-                    resp.list.push(error);
-                });
-            }
+        resp.push({message: errors});
+    }
+    if (typeof errors === 'object' && !isArray(errors)) {
+        // This should match the Error typedef
+        resp.push(errors);
+    }
+    if (isArray(errors)) {
+        each(errors, function (error, key) {
+            resp = resp.concat(parseErrorItem(error));
         });
     }
+
+    return resp;
+};
+
+// Takes errors and normalizes them
+var normalizeErrors = function (errors, key) {
+    var resp = [];
+    if (typeof errors === 'string' || (typeof errors === 'object' && !isArray(errors))) {
+        // Only one error set, which we can assume was for a single property
+        errors = [errors];
+    }
+    each(errors, function (error) {
+        resp = resp.concat(parseErrorItem(error));
+    });
+
     return resp;
 };
 module.exports = function (errors, format) {

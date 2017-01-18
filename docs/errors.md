@@ -1,4 +1,4 @@
-@typedef {undefined|string|ERROR|array} can-validate/types/errors errors
+@typedef {undefined|string|ERROR|array} can-validate/types/errors Errors
 @parent can-validate/types
 
 The expected response from a validator if a value fails validation.
@@ -11,14 +11,14 @@ The expected response from a validator if a value fails validation.
 "is required"
 ```
 
-@option {array} Can be an array of strings or an array of [can-validate/types/error] types.
+@option {array} Items can be any of the valid [can-validate/types/errors].
 
-```javascript
-["is required"]
+```json
+["is required", { "message": "is required", "related": ["billingZip", "residenceZip"]}]
 ```
 
 @option {ERROR} An object used to describe an error message. See [can-validate/types/error].
 
-```javascript
-{ "message": "is required", "related": []}
+```json
+{ "message": "is required", "related": ["billingZip", "residenceZip"]}
 ```
