@@ -5,25 +5,57 @@ A function that validates a value against predefined constraints and returns val
 
 @signature `validator(value)`
 
-@param {Boolean|String|Number} value A simple value to validate
+```javascript
+function (value) {
+	if (typeof value === 'undefined' || value === '')) {
+		return 'is required';
+	}
+}
+```
 
-@return {Array|Error|string|undefined}  Returns undefined if no errors found. Otherwise, will return an error type with the error message.
+@param {*} value A simple value to validate
+
+@return {Error|String|undefined|Array<Error|String>}  Returns undefined if no errors found. Otherwise, will return an error type with the error message.
 
 @body
 
 ## Creating a validator
 
+Given that a `required` validation exists
+```javascript
+// Custom required check
+var checkRequired = function (val) {
+    if (typeof value === 'undefined' || value === '') {
+        return false;
+    }
+    return true;
+};
+```
+
 Typically a validator can be created like so
 
 ```javascript
+// Validator factory
 var makeValidator = function (constraints) {
-    return function (value) {
-        var resp;
-        // Validate value here, set errors to `resp`
-        return resp;
-    }
+	return function (value) {
+		if (constraints.required && !checkRequired(value)) {
+			return 'is required';
+		}
+	}
 };
+```
 
+Now, creating a validator for any value is possible by doing
+
+```javascript
+var nameValidator = makeValidator({required: true});
+```
+
+Which then allows validating values as needed
+
+```javascript
+nameValidator('Juan'); //> undefined
+nameValidator(); //> 'is required'
 ```
 
 ## Validator Response

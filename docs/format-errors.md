@@ -5,6 +5,10 @@
 Processes `errors` (only items that match the [can-validate/types/errors] type) and
 converts items to a structure defined by `format`.
 
+```javascript
+formatErrors(['is required', {message: 'is invalid'}], 'errors');
+```
+
 @param {errors} errors A value that matches the [can-validate/types/errors] type.
 @param {string} [format] Should be equal to `object`, `flat`, or `errors`.
 
@@ -25,10 +29,10 @@ Given the following...
 var person = {};
 // against these constraints
 var constraints = {
-    age: {
-        required: true,
-        number: true
-    }
+	age: {
+		required: true,
+		number: true
+	}
 };
 // will return some errors
 var errors = someValidator(person, constraints);//> ["is required", "must be a number"]
@@ -42,7 +46,7 @@ If no key exists in the error response, an array like object will be created.
 
 ```json
 {
-    "0": ["is required", "must be a number"]
+	"0": ["is required", "must be a number"]
 }
 ```
 
@@ -50,8 +54,8 @@ If no key exists in the error response, an array like object will be created.
 
 ```json
 [
-    "is required",
-    "must be a number"
+	"is required",
+	"must be a number"
 ]
 ```
 
@@ -64,7 +68,31 @@ in `related`.
 
 ```json
 [
-    { "message": "is required", "related": []},
-    { "message": "must be a number", "related": []}
+	{ "message": "is required", "related": []},
+	{ "message": "must be a number", "related": []}
+]
+```
+
+### Handling errors without `related`
+
+Given the following errors object
+
+```json
+[
+	"is required",
+	{"message": "must be a number"},
+	{"message": "must be a number", "related": ["zipCode"]}
+]
+```
+
+Because only one item in the array has a `related` property, the other two items
+will be grouped together by assigning them the wildcard (`*`) key. Once processed,
+the errors will look like
+
+```json
+[
+	{"message": "is required", "related": ["*"]},
+	{"message": "must be a number", "related": ["*"]},
+	{"message": "must be a number", "related": ["zipCode"]}
 ]
 ```

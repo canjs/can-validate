@@ -3,26 +3,57 @@
 
 An object that defines a validation failure.
 
-@option {string} message A reason why value is in an invalid state.
+@type {Object}
 
-@option {string|array} [related] Key names that are related to triggering the
-invalid state of the current value.
+  @option {string} message A reason why value is in an invalid state.
 
+  ```javascript
+  var error = { "message": "is required"};
+  ```
+
+  @option {string|array} [related=*] Key names that are related to triggering the
+  invalid state of the current value.
+
+  ```json
+  { "message": "is required", "related": "age"}
+  ```
+
+  ```json
+  { "message": "is required", "related": ["billingZip", "residenceZip"]}
+  ```
+
+  If no value is passed, the wild card value (`*`) is used internally for grouping.
 
 @body
 
-## Examples
+## Wild card
 
-```json
-{ "message": "is required", "related": ["billingZip", "residenceZip"]}
+It is common to group errors by the property that triggered the error state. In
+some cases, it possible to group errors where one error is not identified with
+a property.
+
+```javascript
+var errors = [
+    { message: 'is required'},
+    {
+        message: 'must be a number',
+        related: 'age'
+    }
+];
 ```
 
+In this situation, the first object in the array is not identified with a property.
+This item will have a `related` assumed to be `*`. It possible for this error item
+to be grouped with other "orphaned" errors.
 
-```json
-{ "message": "is required", "related": "age"}
-```
-
-
-```json
-{ "message": "is required"}
+```javascript
+var errors = [
+    {
+        message: 'is required',
+        related: '*'
+    }, {
+        message: 'must be a number',
+        related: 'age'
+    }
+];
 ```
