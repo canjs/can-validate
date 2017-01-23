@@ -1,7 +1,7 @@
 @module {Object} can-validate
 @parent can-ecosystem
-@group can-validate/methods Methods
-@group can-validate/types Types
+@group can-validate.methods 1 Methods
+@group can-validate.types 2 Types
 @package ../package.json
 
 Shared utilities and type definitions to process validation errors.
@@ -23,7 +23,7 @@ var errors = utils.formatErrors(validate(obj, constraints), 'flat');
 
 ## Usage
 
-The [can-validate/methods/formatErrors] method can be used to convert errors into something more useful.
+The [can-validate.formatErrors] method can be used to convert errors into something more useful.
 
 ```javascript
 var formatErrors = require('can-validate').formatErrors;
@@ -35,18 +35,20 @@ var errors = [
     }
 ];
 
-// Will return [{'*': ['is required']}, {'age': ['must be a number']}]
 formatErrors(errors, 'object');
-// Will return ['is required', 'must be a number']
+//=> [{'*': ['is required']}, {'age': ['must be a number']}]
+
 formatErrors(errors, 'flat');
-// Will return [{message: 'is required', related: '*'}, {'age': ['must be a number']}]
+//=> ['is required', 'must be a number']
+
 formatErrors(errors, 'errors');
+//=> [{message: 'is required', related: '*'}, {'age': ['must be a number']}]
 ```
 
 ## Types
 
 Core definitions of types used in validation.
 
-- [can-validate/types/error] A flexible typedef that describes a validation error.
-- [can-validate/types/errors] Different error types understood by `can-validate`.
-- [can-validate/types/validator] A function that validate a given value against registered constraints.
+- [can-validate.error] A flexible typedef that describes a validation error.
+- [can-validate.errors] Different error types understood by `can-validate`.
+- [can-validate.validator] A function that validate a given value against registered constraints.

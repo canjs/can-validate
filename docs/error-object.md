@@ -1,5 +1,5 @@
-@typedef {object} can-validate/types/error Error
-@parent can-validate/types
+@typedef {object} can-validate.error Error
+@parent can-validate.types
 
 An object that defines a validation failure.
 
