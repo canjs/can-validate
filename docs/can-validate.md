@@ -51,4 +51,4 @@ Core definitions of types used in validation.
 
 - [can-validate.error] A flexible typedef that describes a validation error.
 - [can-validate.errors] Different error types understood by `can-validate`.
-- [can-validate.validator] A function that validate a given value against registered constraints.
+- [can-validate.validator] A function that validates a given value against registered constraints.
