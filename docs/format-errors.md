@@ -20,27 +20,17 @@
 
 ## Usage
 
-The `errors` value should match the possible [can-validate.errors] type.
-
-Given the following...
+The `errors` value should match the possible [can-validate.errors] type.  `formatErrors` will process any [can-validate.errors] type into the requested format.
 
 ```js
-// validate this object
-var person = {};
-// against these constraints
-var constraints = {
-	age: {
-		required: true,
-		number: true
-	}
-};
-// will return some errors
-var errors = someValidator(person, constraints);//> ["is required", "must be a number"]
+// Given a validator returns some errors...
+var errors = someValidator(person, constraints);//> ['is required', {message: 'is invalid'}];
+formatErrors(errors, 'flat');//> ['is required', 'is invalid']
 ```
 
-We can expect the following responses
 
-### Object Example
+
+### Example Outputs
 
 If no key exists in the error response, an array like object will be created.
 
@@ -50,7 +40,9 @@ If no key exists in the error response, an array like object will be created.
 }
 ```
 
-### Flat Example
+**Flattening Errors**
+
+Using `flat`, an array of strings will be returned.
 
 ```json
 [
@@ -59,12 +51,13 @@ If no key exists in the error response, an array like object will be created.
 ]
 ```
 
+**Converting to [can-validate.error-object] type**
 
+Using `errors`, an object of errors formatted using the [can-validate.error-object]
+type will be returned.
 
-### Errors Example
-
-If a key name exists in the error response, then we can expect to see the key name
-in `related`.
+If a key name exists with the original error, using the [can-validate.error-object]
+type will include the key name in the `related` property.
 
 ```json
 [
@@ -73,9 +66,9 @@ in `related`.
 ]
 ```
 
-### Handling errors without `related`
+**Handling errors without `related`**
 
-Given the following errors object
+An error is not required to include a key name.
 
 ```json
 [
@@ -87,7 +80,8 @@ Given the following errors object
 
 Because only one item in the array has a `related` property, the other two items
 will be grouped together by assigning them the wildcard (`*`) key. Once processed,
-the errors will look like
+the errors will be normalized internally. The normalized errors are used when
+converting errors to the requested format.
 
 ```json
 [
