@@ -15,7 +15,6 @@
     "release:minor": "npm version minor && npm run build && npm publish",
     "release:major": "npm version major && npm run build && npm publish",
     "build": "node build.js",
-    "document": "bit-docs",
     "develop": "http-server -c-1"
   },
   "repository": {
@@ -60,23 +59,5 @@
   },
   "dependencies": {
     "can-util": "^3.9.0-pre.4"
-  },
-  "bit-docs": {
-    "dependencies": {
-      "bit-docs-glob-finder": "^0.0.5",
-      "bit-docs-dev": "^0.0.3",
-      "bit-docs-js": "^0.0.3",
-      "bit-docs-generate-readme": "^0.0.8"
-    },
-    "glob": {
-      "pattern": "**/*.{js,md}",
-      "ignore": "node_modules/**/*"
-    },
-    "readme": {
-      "apis": [
-        "can-validate"
-      ]
-    },
-    "parent": "can-validate"
   }
 }
