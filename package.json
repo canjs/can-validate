@@ -58,6 +58,6 @@
     "transpiler": "babel"
   },
   "dependencies": {
-    "can-util": "^3.9.0-pre.4"
+    "can-util": "^3.9.0"
   }
 }
