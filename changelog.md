@@ -2,6 +2,21 @@
 @parent can-validate-plugin
 # Change log
 
+## [1.0.0.pre]
+
+### Removed
+
+- No longer ships with validate.js shims
+- No longer ships with can.Map plugin
+- `validate`, `one`, and `isValid` methods
+
+### Added
+
+- `test` method, behaves similarly as `isValid` but also sets errors
+- `errors` method to retrieve errors
+- Register validator and library methods
+- Extend method for plugins using can-construct
+
 ## [0.9.2] - 2015-06-02
 
 ### Changed

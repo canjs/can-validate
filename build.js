@@ -1,9 +1,9 @@
 var stealTools = require('steal-tools');
 
 stealTools.export({
-	system: {
+	steal: {
 		config: 'package.json!npm',
-		main: 'can-validate.build'
+		main: 'can-validate'
 	},
 	options: {
 		sourceMaps: true
