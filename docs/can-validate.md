@@ -1,5 +1,6 @@
 @module {Object} can-validate
-@parent can-ecosystem
+@parent can-data-validation
+@collection can-ecosystem
 @group can-validate.methods 1 Methods
 @group can-validate.types 2 Types
 @package ../package.json
