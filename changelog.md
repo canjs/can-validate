@@ -1,6 +1,10 @@
 @page changelog Changelog
 @parent can-validate-plugin
+@hide
+
 # Change log
+
+See the [latest releases on GitHub](https://github.com/canjs/can-validate/releases).
 
 ## [1.0.0.pre]
 
