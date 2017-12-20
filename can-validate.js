@@ -1,5 +1,4 @@
-var each = require('can-util/js/each/each');
-var isArray = require('can-util/js/is-array/is-array');
+var canReflect = require('can-reflect');
 
 var validate = {};
 
@@ -7,8 +6,8 @@ var helpers = {
 	'object': function (normalizedErrors) {
 		var errors = normalizedErrors.length > 0 ? {}: undefined;
 
-		each(normalizedErrors, function (error) {
-			each(error.related, function (related) {
+		canReflect.eachIndex(normalizedErrors, function (error) {
+			canReflect.eachIndex(error.related, function (related) {
 				if (!errors[related]) {
 					errors[related] = [];
 				}
@@ -19,7 +18,7 @@ var helpers = {
 	},
 	'flat': function (normalizedErrors) {
 		var errors = normalizedErrors.length > 0 ? []: undefined;
-		each(normalizedErrors, function (error) {
+		canReflect.eachIndex(normalizedErrors, function (error) {
 			errors.push(error.message);
 		});
 		return errors;
@@ -29,8 +28,8 @@ var helpers = {
 	},
 	'errors-object': function (normalizedErrors) {
 		var errors = normalizedErrors.length > 0 ? {}: undefined;
-		each(normalizedErrors, function (error) {
-			each(error.related, function (related) {
+		canReflect.eachIndex(normalizedErrors, function (error) {
+			canReflect.eachIndex(error.related, function (related) {
 				if (!errors[related]) {
 					errors[related] = [];
 				}
@@ -46,11 +45,11 @@ var parseErrorItem = function (rawErrors) {
 	if (typeof rawErrors === 'string') {
 		errors.push({message: rawErrors, related: ['*']});
 	}
-	if (typeof rawErrors === 'object' && !isArray(rawErrors)) {
+	if (typeof rawErrors === 'object' && !Array.isArray(rawErrors)) {
 		// Although related can be a string, internally, it is easier if it is
 		// always an array
 		if (rawErrors.related) {
-			if (!isArray(rawErrors.related)) {
+			if (!Array.isArray(rawErrors.related)) {
 				rawErrors.related = [rawErrors.related];
 			}
 		} else {
@@ -58,8 +57,8 @@ var parseErrorItem = function (rawErrors) {
 		}
 		errors.push(rawErrors);
 	}
-	if (isArray(rawErrors)) {
-		each(rawErrors, function (error) {
+	if (Array.isArray(rawErrors)) {
+		canReflect.eachIndex(rawErrors, function (error) {
 			[].push.apply(errors, parseErrorItem(error));
 		});
 	}
@@ -69,13 +68,16 @@ var parseErrorItem = function (rawErrors) {
 // Takes errors and normalizes them
 var normalizeErrors = function (rawErrors) {
 	var normalizedErrors = [];
-	if (typeof rawErrors === 'string' || (typeof rawErrors === 'object' && !isArray(rawErrors))) {
+  if (
+    typeof rawErrors === 'string' ||
+    (typeof rawErrors === 'object' && !Array.isArray(rawErrors))
+  ) {
 		// Only one error set, which we can assume was for a single property
 		rawErrors = [rawErrors];
 	}
-	each(rawErrors, function (error) {
-        [].push.apply(normalizedErrors, parseErrorItem(error));
-	});
+  canReflect.eachIndex(rawErrors, function (error) {
+    [].push.apply(normalizedErrors, parseErrorItem(error));
+  });
 
 	return normalizedErrors;
 };

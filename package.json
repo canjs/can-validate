@@ -9,7 +9,7 @@
     "postversion": "git push --tags && git checkout master && git branch -D release && git push",
     "testee": "testee test.html --browsers firefox",
     "test": "npm run detect-cycle && npm run jshint && npm run testee",
-    "jshint": "jshint .",
+    "jshint": "jshint . --config",
     "release:pre": "npm version prerelease && npm run build && npm publish --tag=pre",
     "release:patch": "npm version patch && npm run build && npm publish",
     "release:minor": "npm version minor && npm run build && npm publish",
@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/canjs/can-validate",
   "devDependencies": {
-    "bit-docs": "0.0.8-2",
+    "bit-docs": "0.0.8",
     "detect-cyclic-packages": "^1.1.0",
     "http-server": "^0.10.0",
     "jshint": "^2.9.4",
@@ -53,13 +53,11 @@
       "testee",
       "steal-tools"
     ],
-    "npmAlgorithm": "flat",
     "npmDependencies": [
       "steal-qunit"
-    ],
-    "transpiler": "babel"
+    ]
   },
   "dependencies": {
-    "can-util": "^3.9.0"
+    "can-reflect": "^1.11.1"
   }
 }
