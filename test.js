@@ -7,6 +7,10 @@ var errorObject = [numberString, {message: requireString, related: ['name']}, [r
 
 QUnit.module('can-validate utilities');
 
+QUnit.test('fomarErrors does not throw with undefined', function(assert) {
+  assert.deepEqual(validate.formatErrors(undefined), []);
+});
+
 QUnit.test('formatErrors to errors', function () {
 	var errors = validate.formatErrors(errorObject);
 	var expectedErrors = [
