@@ -1,6 +1,5 @@
 var validate = require('can-validate');
 var QUnit = require('steal-qunit');
-var isEmptyObject = require('can-util/js/is-empty-object/is-empty-object');
 
 var requireString = 'is required';
 var numberString = 'must be a number';
