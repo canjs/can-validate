@@ -1,6 +1,6 @@
 {
   "name": "can-validate",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "can-validate.js",
   "description": "Validation plugin for CanJS.",
   "scripts": {
