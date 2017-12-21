@@ -75,9 +75,12 @@ var normalizeErrors = function (rawErrors) {
 		// Only one error set, which we can assume was for a single property
 		rawErrors = [rawErrors];
 	}
-  canReflect.eachIndex(rawErrors, function (error) {
-    [].push.apply(normalizedErrors, parseErrorItem(error));
-  });
+
+  if (rawErrors != null) {
+    canReflect.eachIndex(rawErrors, function (error) {
+      [].push.apply(normalizedErrors, parseErrorItem(error));
+    });
+  }
 
 	return normalizedErrors;
 };
