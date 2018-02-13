@@ -5,7 +5,7 @@
   Processes `errors` (only items that match the [can-validate.errors] type) and
   converts items to a structure defined by `format`.
 
-  ```js
+  ```javascript
   formatErrors(['is required', {message: 'is invalid'}], 'errors');
   ```
 
@@ -24,18 +24,18 @@ The `errors` value should match the possible [can-validate.errors] type.
 
 Given the following...
 
-```js
+```javascript
 // validate this object
-var person = {};
+const person = {};
 // against these constraints
-var constraints = {
-	age: {
-		required: true,
-		number: true
-	}
+const constraints = {
+  age: {
+    required: true,
+    number: true
+  }
 };
 // will return some errors
-var errors = someValidator(person, constraints);//> ["is required", "must be a number"]
+const errors = someValidator(person, constraints);//> ["is required", "must be a number"]
 ```
 
 We can expect the following responses

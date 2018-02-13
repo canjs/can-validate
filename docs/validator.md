@@ -5,11 +5,11 @@ A function that validates a value against predefined constraints and returns val
 
 @signature `validator(value)`
 
-  ```js
+  ```javascript
   function validator(value) {
-  	if (typeof value === 'undefined' || value === '') {
-  		return 'is required';
-  	}
+    if (typeof value === 'undefined' || value === '') {
+      return 'is required';
+    }
   }
   ```
 
@@ -22,9 +22,9 @@ A function that validates a value against predefined constraints and returns val
 ## Creating a validator
 
 Given that a `required` validation exists
-```js
+```javascript
 // Custom required check
-var checkRequired = function (val) {
+const checkRequired = function (val) {
     if (typeof value === 'undefined' || value === '') {
         return false;
     }
@@ -34,26 +34,26 @@ var checkRequired = function (val) {
 
 Typically a validator can be created like so
 
-```js
+```javascript
 // Validator factory
-var makeValidator = function (constraints) {
-	return function (value) {
-		if (constraints.required && !checkRequired(value)) {
-			return 'is required';
-		}
-	}
+const makeValidator = function (constraints) {
+  return function (value) {
+    if (constraints.required && !checkRequired(value)) {
+      return 'is required';
+    }
+  }
 };
 ```
 
 Now, creating a validator for any value is possible by doing
 
-```js
-var nameValidator = makeValidator({required: true});
+```javascript
+const nameValidator = makeValidator({required: true});
 ```
 
 Which then allows validating values as needed
 
-```js
+```javascript
 nameValidator('Juan'); //> undefined
 nameValidator(); //> 'is required'
 ```

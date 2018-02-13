@@ -13,11 +13,11 @@ The `can-validate` module exports helpful methods used for validation and also d
 the different types used during validation.
 
 ```javascript
-var validate = require('my-validator');
-var utils = require('can-validate');
+import validate from 'my-validator';
+import utils from 'can-validate';
 
 // Normalize errors into a flat structure
-var errors = utils.formatErrors(validate(obj, constraints), 'flat');
+const errors = utils.formatErrors(validate(obj, constraints), 'flat');
 ```
 
 @body
@@ -27,8 +27,8 @@ var errors = utils.formatErrors(validate(obj, constraints), 'flat');
 The [can-validate.formatErrors] method can be used to convert errors into something more useful.
 
 ```javascript
-var formatErrors = require('can-validate').formatErrors;
-var errors = [
+import {formatErrors} from 'can-validate';
+const errors = [
     'is required',
     {
         message: 'must be a number',
