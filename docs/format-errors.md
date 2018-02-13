@@ -5,8 +5,8 @@
   Processes `errors` (only items that match the [can-validate.errors] type) and
   converts items to a structure defined by `format`.
 
-  ```javascript
-  formatErrors(['is required', {message: 'is invalid'}], 'errors');
+  ```js
+formatErrors(['is required', {message: 'is invalid'}], 'errors');
   ```
 
   @param {can-validate.errors} errors A value that matches the [can-validate.errors] type.
@@ -24,15 +24,15 @@ The `errors` value should match the possible [can-validate.errors] type.
 
 Given the following...
 
-```javascript
+```js
 // validate this object
 const person = {};
 // against these constraints
 const constraints = {
-  age: {
-    required: true,
-    number: true
-  }
+	age: {
+		required: true,
+		number: true
+	}
 };
 // will return some errors
 const errors = someValidator(person, constraints);//> ["is required", "must be a number"]

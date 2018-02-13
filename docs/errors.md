@@ -9,7 +9,7 @@ The expected response from a validator if a value fails validation.
 
 @option {string} A message explaining the validation failure.
 
-```javascript
+```js
 "is required"
 ```
 

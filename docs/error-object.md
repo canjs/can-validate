@@ -7,8 +7,8 @@ An object that defines a validation failure.
 
   @option {string} message A reason why value is in an invalid state.
 
-  ```javascript
-  const error = { "message": "is required"};
+  ```js
+const error = { "message": "is required"};
   ```
 
   @option {string|array} [related=*] Key names that are related to triggering the
@@ -32,13 +32,13 @@ It is common to group errors by the property that triggered the error state. In
 some cases, it possible to group errors where one error is not identified with
 a property.
 
-```javascript
+```js
 const errors = [
-    { message: 'is required'},
-    {
-        message: 'must be a number',
-        related: 'age'
-    }
+	{ message: 'is required'},
+	{
+		message: 'must be a number',
+		related: 'age'
+	}
 ];
 ```
 
@@ -46,14 +46,14 @@ In this situation, the first object in the array is not identified with a proper
 This item will have a `related` assumed to be `*`. It possible for this error item
 to be grouped with other "orphaned" errors.
 
-```javascript
+```js
 const errors = [
-    {
-        message: 'is required',
-        related: '*'
-    }, {
-        message: 'must be a number',
-        related: 'age'
-    }
+	{
+		message: 'is required',
+		related: '*'
+	}, {
+		message: 'must be a number',
+		related: 'age'
+	}
 ];
 ```
