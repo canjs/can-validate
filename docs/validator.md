@@ -6,8 +6,8 @@ A function that validates a value against predefined constraints and returns val
 @signature `validator(value)`
 
   ```js
-  function (value) {
-  	if (typeof value === 'undefined' || value === '')) {
+  function validator(value) {
+  	if (typeof value === 'undefined' || value === '') {
   		return 'is required';
   	}
   }
