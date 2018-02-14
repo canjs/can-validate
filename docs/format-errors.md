@@ -6,8 +6,8 @@
   converts items to a structure defined by `format`.
 
   ```js
-formatErrors(['is required', {message: 'is invalid'}], 'errors');
-  ```
+formatErrors( [ "is required", { message: "is invalid" } ], "errors" );
+```
 
   @param {can-validate.errors} errors A value that matches the [can-validate.errors] type.
   @param {string} [format] Should be equal to `object`, `flat`, or `errors`.
@@ -27,6 +27,7 @@ Given the following...
 ```js
 // validate this object
 const person = {};
+
 // against these constraints
 const constraints = {
 	age: {
@@ -34,8 +35,9 @@ const constraints = {
 		number: true
 	}
 };
+
 // will return some errors
-const errors = someValidator(person, constraints);//> ["is required", "must be a number"]
+const errors = someValidator( person, constraints );//> ["is required", "must be a number"]
 ```
 
 We can expect the following responses

@@ -8,8 +8,8 @@ An object that defines a validation failure.
   @option {string} message A reason why value is in an invalid state.
 
   ```js
-const error = { "message": "is required"};
-  ```
+const error = { "message": "is required" };
+```
 
   @option {string|array} [related=*] Key names that are related to triggering the
   invalid state of the current value.
@@ -34,10 +34,10 @@ a property.
 
 ```js
 const errors = [
-	{ message: 'is required'},
+	{ message: "is required" },
 	{
-		message: 'must be a number',
-		related: 'age'
+		message: "must be a number",
+		related: "age"
 	}
 ];
 ```
@@ -49,11 +49,11 @@ to be grouped with other "orphaned" errors.
 ```js
 const errors = [
 	{
-		message: 'is required',
-		related: '*'
+		message: "is required",
+		related: "*"
 	}, {
-		message: 'must be a number',
-		related: 'age'
+		message: "must be a number",
+		related: "age"
 	}
 ];
 ```

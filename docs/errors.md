@@ -10,7 +10,7 @@ The expected response from a validator if a value fails validation.
 @option {string} A message explaining the validation failure.
 
 ```js
-"is required"
+"is required";
 ```
 
 @option {array} Items can be any of the valid [can-validate.errors].
