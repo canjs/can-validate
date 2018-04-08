@@ -58,6 +58,6 @@
     ]
   },
   "dependencies": {
-    "can-reflect": "^1.11.1"
+    "can-reflect": "^1.14.4"
   }
 }
