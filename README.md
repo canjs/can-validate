@@ -5,8 +5,6 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/canjs/can-validate/blob/master/LICENSE.md)
 [![npm version](https://badge.fury.io/js/can-validate.svg)](https://www.npmjs.com/package/can-validate)
 [![Travis build status](https://travis-ci.org/canjs/can-validate.svg?branch=master)](https://travis-ci.org/canjs/can-validate)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/canjs/can-validate?branch=master&svg=true)](https://ci.appveyor.com/project/matthewp/can-validate)
-[![Coverage status](https://coveralls.io/repos/github/canjs/can-validate/badge.svg?branch=master)](https://coveralls.io/github/canjs/can-validate?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/canjs/can-validate.svg)](https://greenkeeper.io/)
 
 Live binding handlebars templates
