@@ -28,7 +28,7 @@ QUnit.test('formatErrors to errors', function () {
 			related: ["name"]
 		}
 	];
-	QUnit.deepEqual(errors, expectedErrors, 'errors object is converted to array of error types');
+	assert.deepEqual(errors, expectedErrors, 'errors object is converted to array of error types');
 });
 
 QUnit.test('formatErrors to flat',function(){
@@ -39,7 +39,7 @@ QUnit.test('formatErrors to flat',function(){
 		"is required",
 		"must be a number"
 	];
-	QUnit.deepEqual(errors, expectedErrors, 'Converts errors to a list of strings');
+	assert.deepEqual(errors, expectedErrors, 'Converts errors to a list of strings');
 });
 
 QUnit.test('formatErrors to object',function(){
@@ -48,5 +48,5 @@ QUnit.test('formatErrors to object',function(){
 		"*": ["must be a number", "is required"],
 		"name": ["is required", "must be a number"]
 	};
-	QUnit.deepEqual(errors, expectedErrors, 'converts errors to object of strings');
+	assert.deepEqual(errors, expectedErrors, 'converts errors to object of strings');
 });
