@@ -11,7 +11,7 @@ QUnit.test('fomarErrors does not throw with undefined', function(assert) {
   assert.deepEqual(validate.formatErrors(undefined), []);
 });
 
-QUnit.test('formatErrors to errors', function () {
+QUnit.test('formatErrors to errors', function (assert) {
 	var errors = validate.formatErrors(errorObject);
 	var expectedErrors = [
 		{
@@ -28,10 +28,10 @@ QUnit.test('formatErrors to errors', function () {
 			related: ["name"]
 		}
 	];
-	QUnit.deepEqual(errors, expectedErrors, 'errors object is converted to array of error types');
+	assert.deepEqual(errors, expectedErrors, 'errors object is converted to array of error types');
 });
 
-QUnit.test('formatErrors to flat',function(){
+QUnit.test('formatErrors to flat',function(assert){
 	var errors = validate.formatErrors(errorObject, 'flat');
 	var expectedErrors = [
 		"must be a number",
@@ -39,14 +39,14 @@ QUnit.test('formatErrors to flat',function(){
 		"is required",
 		"must be a number"
 	];
-	QUnit.deepEqual(errors, expectedErrors, 'Converts errors to a list of strings');
+	assert.deepEqual(errors, expectedErrors, 'Converts errors to a list of strings');
 });
 
-QUnit.test('formatErrors to object',function(){
+QUnit.test('formatErrors to object',function(assert){
 	var errors = validate.formatErrors(errorObject, 'object');
 	var expectedErrors = {
 		"*": ["must be a number", "is required"],
 		"name": ["is required", "must be a number"]
 	};
-	QUnit.deepEqual(errors, expectedErrors, 'converts errors to object of strings');
+	assert.deepEqual(errors, expectedErrors, 'converts errors to object of strings');
 });
